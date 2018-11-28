@@ -1,0 +1,4 @@
+segmentation fault is because there is a broken pipeline in the ros package 
+
+update the ros package will solve the issue 
+sudo apt-get --only-upgrade install ros-kinetic-*

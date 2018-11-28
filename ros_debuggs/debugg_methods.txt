@@ -1,0 +1,65 @@
+
+
+Gazebo 
+error:
+
+[gazebo-2] process has died [pid 9359, exit code 255, cmd /opt/ros/kinetic/lib/gazebo_ros/gzserver -e ode worlds/willowgarage.world __name:=gazebo __log:=/home/asimov/.ros/log/0ffce552-cc50-11e8-8e03-542aa24ff9a2/gazebo-2.log].
+log file: /home/asimov/.ros/log/0ffce552-cc50-11e8-8e03-542aa24ff9a2/gazebo-2*.log
+
+Solution:
+
+	relaunch 
+	clear the log file in /home/user_name/.ros/log delete the folder and relaunch the gazebo
+
+
+
+
+Rviz:
+
+error :
+
+No transform between base_footprint and base_link
+No transform between base_footprint and odom
+
+[ WARN] [1539179068.598024979, 428.251000000]: Timed out waiting for transform from base_footprint to map to become 
+available before running costmap, tf error: canTransform: target_frame map does not exist.. canTransform returned after 
+428.251 timeout was 0.1.
+
+
+cause for the error:
+
+robot_state_publisher package 
+
+
+Solution:
+
+
+robot_state_publisher package not lauched are lauched wrongly
+
+"rosrun tf view_frames"  to view the transformation of the link
+
+"rosrun tf tf_echo base_footprint base_link"
+
+"rosrun tf tf_monitor base_footprint base_link"
+
+
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+  
+  <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" output="screen" >
+    <param name="publish_frequency" type="double" value="50.0" />
+  </node>
+
+ https://answers.ros.org/question/249766/no-transform-between-base_footprint-and-base_link/
+
+
+
+important 
+
+compare the frames.pdf created with this command "rosrun tf view_frames" 
+
+if the odom was not published 
+
+then go to the urdf change gazebo plug in odom topic  name with slash before '/odom' or '/diff_odom'
+
+
